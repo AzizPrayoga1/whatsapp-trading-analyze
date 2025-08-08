@@ -7,6 +7,19 @@ class WhatsAppClient {
   constructor() {
     this.client = new Client({
       authStrategy: new LocalAuth(),
+      puppeteer: {
+        headless: true,
+        args: [
+          '--no-sandbox',
+          '--disable-setuid-sandbox',
+          '--disable-dev-shm-usage',
+          '--disable-accelerated-2d-canvas',
+          '--no-first-run',
+          '--no-zygote',
+          '--single-process',
+          '--disable-gpu'
+        ]
+      }
     });
     this.setupEventHandlers();
   }
@@ -32,6 +45,14 @@ class WhatsAppClient {
 
     this.client.on("disconnected", (reason) => {
       console.log("Client was disconnected:", reason);
+    });
+
+    this.client.on("auth_failure", (msg) => {
+      console.error("Authentication failed:", msg);
+    });
+
+    this.client.on("loading_screen", (percent, message) => {
+      console.log("Loading screen:", percent, message);
     });
   }
 

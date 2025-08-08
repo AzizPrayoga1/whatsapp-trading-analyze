@@ -24,6 +24,15 @@ async function start() {
     console.log("\nUsing Binance API: https://api3.binance.com");
   } catch (error) {
     console.error("Failed to start bot:", error);
+    
+    if (error.message.includes("libatk") || error.message.includes("chrome")) {
+      console.error("\n=== SERVER SETUP REQUIRED ===");
+      console.error("It looks like you're running on a headless server.");
+      console.error("Please run the setup script: ./setup-server.sh");
+      console.error("Or see SERVER-SETUP.md for manual installation steps.");
+      console.error("==============================\n");
+    }
+    
     process.exit(1);
   }
 }
