@@ -234,32 +234,32 @@ export async function getTradingAnalysis(symbol) {
     };
 
     const prompt = `
-Analisa data trading berikut untuk ${symbol} dan berikan analisis teknikal yang komprehensif dalam bahasa Indonesia:
+Analisa data trading berikut untuk ${symbol} dan berikan analisis teknikal dalam bahasa Indonesia:
 
 Data Market:
-- Harga saat ini: $${analysisData.currentPrice}
-- Perubahan 24h: ${analysisData.priceChange24h}%
-- Volume 24h: ${analysisData.volume24h}
-- High 24h: $${analysisData.high24h}
-- Low 24h: $${analysisData.low24h}
+Harga saat ini: $${analysisData.currentPrice}
+Perubahan 24h: ${analysisData.priceChange24h}%
+Volume 24h: ${analysisData.volume24h}
+High 24h: $${analysisData.high24h}
+Low 24h: $${analysisData.low24h}
 
 Indikator Teknikal:
-- SMA 20: ${analysisData.sma20 ? "$" + analysisData.sma20.toFixed(2) : "N/A"}
-- SMA 50: ${analysisData.sma50 ? "$" + analysisData.sma50.toFixed(2) : "N/A"}
-- RSI: ${analysisData.rsi ? analysisData.rsi.toFixed(1) : "N/A"}
+SMA 20: ${analysisData.sma20 ? "$" + analysisData.sma20.toFixed(2) : "N/A"}
+SMA 50: ${analysisData.sma50 ? "$" + analysisData.sma50.toFixed(2) : "N/A"}
+RSI: ${analysisData.rsi ? analysisData.rsi.toFixed(1) : "N/A"}
 
 Sinyal Trading: ${analysisData.tradingSignal}
 Kekuatan Sinyal: ${analysisData.signalStrength}
 Alasan: ${analysisData.signalReasons.join(", ")}
 
-Berikan analisis dalam format:
-1. Ringkasan Kondisi Market
-2. Analisis Teknikal
-3. Sinyal Trading
-4. Risk Management
-5. Target dan Stop Loss (jika ada sinyal)
+Berikan analisis dalam format poin sederhana:
+1. Kondisi market saat ini
+2. Trend harga dan momentum  
+3. Sinyal buy/sell/hold
+4. Level risk dan stop loss
+5. Target harga jika ada
 
-Gunakan bahasa yang mudah dipahami untuk trader pemula. .
+Jawab dalam poin-poin singkat tanpa formatting dan tanpa emoji.
 `;
 
     const response = await ai.models.generateContent({
@@ -306,12 +306,12 @@ export async function getMarketSentiment() {
 Analisa sentimen market crypto berdasarkan data berikut:
 
 Bitcoin (BTC):
-- Harga: $${parseFloat(btcData.lastPrice).toFixed(2)}
-- Perubahan 24h: ${parseFloat(btcData.priceChangePercent).toFixed(2)}%
+Harga: $${parseFloat(btcData.lastPrice).toFixed(2)}
+Perubahan 24h: ${parseFloat(btcData.priceChangePercent).toFixed(2)}%
 
 Ethereum (ETH):
-- Harga: $${parseFloat(ethData.lastPrice).toFixed(2)}
-- Perubahan 24h: ${parseFloat(ethData.priceChangePercent).toFixed(2)}%
+Harga: $${parseFloat(ethData.lastPrice).toFixed(2)}
+Perubahan 24h: ${parseFloat(ethData.priceChangePercent).toFixed(2)}%
 
 Top Gainers (24h):
 ${gainers.map((coin, i) => `${i + 1}. ${coin.symbol}: +${parseFloat(coin.priceChangePercent).toFixed(2)}%`).join("\n")}
@@ -319,13 +319,13 @@ ${gainers.map((coin, i) => `${i + 1}. ${coin.symbol}: +${parseFloat(coin.priceCh
 Top Losers (24h):
 ${losers.map((coin, i) => `${i + 1}. ${coin.symbol}: ${parseFloat(coin.priceChangePercent).toFixed(2)}%`).join("\n")}
 
-Berikan analisis sentimen market dalam bahasa Indonesia dengan format:
-1. Kondisi Market Umum
-2. Sentimen Dominan (bullish/bearish/netral)
-3. Faktor Pendorong
-4. Outlook Jangka Pendek
+Berikan analisis sentimen market dalam bahasa Indonesia dengan format poin sederhana:
+1. Kondisi market secara umum
+2. Sentimen dominan bullish/bearish/netral
+3. Faktor utama yang mempengaruhi
+4. Prediksi jangka pendek
 
-Gunakan bahasa yang mudah dipahami. .
+Jawab dalam poin-poin singkat tanpa formatting dan tanpa emoji.
 `;
 
     const response = await ai.models.generateContent({

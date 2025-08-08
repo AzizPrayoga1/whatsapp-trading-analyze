@@ -361,13 +361,15 @@ async function handleMediaMessage(msg) {
         msg.body,
       )
     ) {
-      prompt = `Analisa gambar chart/grafik trading ini dalam bahasa Indonesia. Berikan analisis teknikal yang mudah dipahami dengan format:
-1. Apa yang terlihat di chart
-2. Tren yang sedang terjadi
-3. Level penting (support/resistance)
-4. Insight trading
+      prompt = `Analisa gambar chart/grafik trading ini dalam bahasa Indonesia. Berikan analisis teknikal dalam format poin sederhana:
+1. Kondisi chart saat ini
+2. Tren yang terjadi
+3. Level support dan resistance
+4. Sinyal trading yang terlihat
 
-Caption: ${msg.body}`;
+Caption: ${msg.body}
+
+Jawab dalam poin-poin singkat tanpa formatting dan tanpa emoji.`;
       model = "gemini-2.5-pro";
     } else {
       prompt = `Lihat gambar ini dan buat komentar yang lucu dan menghibur dalam bahasa Indonesia! Gunakan:
